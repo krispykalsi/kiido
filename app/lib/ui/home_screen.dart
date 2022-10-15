@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/tab_state.dart';
+import 'bottom_nav_bar.dart';
 import 'things/things_tab.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -10,11 +11,21 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabState = ref.watch(TabState.provider);
+    late Widget tab;
     switch (tabState) {
       case TabState.things:
-        return const ThingsTab();
+        tab = const ThingsTab();
+        break;
       case TabState.categories:
-        return const Center(child: Text("Categories"));
+        tab = const Center(child: Text("Categories"));
+        break;
     }
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        tab,
+        const BottomNavBar(),
+      ],
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'ui/home_screen.dart';
@@ -17,6 +18,10 @@ class KiidoApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.amber,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.amber,
+          foregroundColor: Colors.black,
+        ),
       ),
       home: const HomeScreen(),
     );

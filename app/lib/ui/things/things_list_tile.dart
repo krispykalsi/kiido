@@ -12,8 +12,8 @@ class ThingsListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
-      visualDensity: VisualDensity.compact,
       leading: CircleAvatar(
+        radius: 26,
         foregroundImage: NetworkImage(thing.iconUrl),
         backgroundColor:
             HSLColor.fromColor(Colors.amber).withLightness(0.3).toColor(),
@@ -29,8 +29,14 @@ class ThingsListTile extends ConsumerWidget {
         Navigator.of(context).pushNamed(ThingDetailView.routeName);
       },
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      title: Text(thing.name),
-      subtitle: Text(thing.category.name),
+      title: Text(
+        thing.name,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      ),
+      subtitle: Text(
+        thing.category.name,
+        style: const TextStyle(color: Colors.grey, fontSize: 18),
+      ),
     );
   }
 }
