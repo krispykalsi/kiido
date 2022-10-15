@@ -4,7 +4,9 @@ import '../data/repository.dart';
 import 'things_view_state.dart';
 
 class ThingsViewNotifier extends StateNotifier<ThingsViewState> {
-  ThingsViewNotifier(super.state, this._repository);
+  ThingsViewNotifier(super.state, this._repository) {
+    loadThings();
+  }
 
   final Repository _repository;
 
