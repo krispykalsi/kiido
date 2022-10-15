@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kiido/state/things_view_state.dart';
@@ -14,13 +15,13 @@ class ThingsListTile extends ConsumerWidget {
     return ListTile(
       leading: CircleAvatar(
         radius: 26,
-        foregroundImage: NetworkImage(thing.iconUrl),
+        foregroundImage: CachedNetworkImageProvider(thing.iconUrl),
         backgroundColor:
-            HSLColor.fromColor(Colors.amber).withLightness(0.3).toColor(),
+            HSLColor.fromColor(Colors.amber).withLightness(0.5).toColor(),
         child: Center(
           child: Text(
-            thing.name[0],
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            thing.name.isNotEmpty ? thing.name[0] : "",
+            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 28),
           ),
         ),
       ),

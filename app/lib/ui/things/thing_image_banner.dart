@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/model/thing.dart';
@@ -18,8 +19,8 @@ class ThingImageBanner extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Image.network(
-              thing.imageUrl,
+            child: CachedNetworkImage(
+              imageUrl: thing.imageUrl,
               alignment: Alignment.center,
               fit: BoxFit.cover,
             ),

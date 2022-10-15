@@ -25,7 +25,7 @@ class ThingDetailView extends ConsumerWidget {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: DefaultTextStyle(
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
