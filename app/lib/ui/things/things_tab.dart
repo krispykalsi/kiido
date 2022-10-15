@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kiido/state/things_view_state.dart';
 
 import 'thing_detail_view.dart';
 import 'things_view.dart';
@@ -18,10 +17,7 @@ class _ThingsTabState extends ConsumerState<ThingsTab> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        ref.read(ThingsViewState.provider.notifier).clearThingInFocus();
-        return !await _navigatorKey.currentState!.maybePop();
-      },
+      onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
       child: Navigator(
         key: _navigatorKey,
         initialRoute: ThingsView.routeName,

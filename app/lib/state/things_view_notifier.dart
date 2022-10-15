@@ -21,8 +21,4 @@ class ThingsViewNotifier extends StateNotifier<ThingsViewState> {
   void bringThingInFocus(Thing thing) {
     state = state.copyWith(thingInFocus: Option.some(thing));
   }
-
-  void clearThingInFocus() {
-    state = state.copyWith(thingInFocus: Option.none());
-  }
 }

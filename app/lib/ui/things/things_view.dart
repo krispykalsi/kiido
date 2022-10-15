@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kiido/ui/things/thing_detail_view.dart';
 
 import 'things_list_tile.dart';
 import '../../state/things_view_state.dart';
@@ -15,14 +14,6 @@ class ThingsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final things = ref.watch(
       ThingsViewState.provider.select((state) => state.things),
-    );
-    ref.listen(
-      ThingsViewState.provider.select((state) => state.thingInFocus),
-      (previous, next) {
-        if (previous != next && next.isSome()) {
-          Navigator.of(context).pushNamed(ThingDetailView.routeName);
-        }
-      },
     );
     return Scaffold(
       appBar: AppBar(title: const Text("Things")),
