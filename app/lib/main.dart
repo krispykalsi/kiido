@@ -14,7 +14,10 @@ class KiidoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Kiido',
-      theme: ThemeData(primarySwatch: Colors.amber),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.amber,
+      ),
       home: const HomeScreen(),
     );
   }
