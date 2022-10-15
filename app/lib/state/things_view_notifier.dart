@@ -21,4 +21,28 @@ class ThingsViewNotifier extends StateNotifier<ThingsViewState> {
   void bringThingInFocus(Thing thing) {
     state = state.copyWith(thingInFocus: Option.some(thing));
   }
+
+  void enterSearch() => state = state.copyWith(isSearching: true);
+
+  void exitSearch() => state = state.copyWith(isSearching: false);
+
+  void filterThingsFor(String searchText) {
+    final things = state.things.maybeWhen(
+      data: (things) => things,
+      orElse: () => <Thing>[],
+    );
+    String searchRegexString = "";
+    for (var i = 0; i < searchText.length; i++) {
+      searchRegexString += "${searchText[i]}.*";
+    }
+    final searchRegexp = RegExp(searchRegexString, caseSensitive: false);
+    final filteredThings = things
+        .where(
+          (thing) =>
+              searchRegexp.hasMatch(thing.name) ||
+              searchRegexp.hasMatch(thing.category.name),
+        )
+        .toList();
+    state = state.copyWith(searchResults: filteredThings);
+  }
 }
