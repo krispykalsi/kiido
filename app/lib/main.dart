@@ -22,6 +22,7 @@ class KiidoApp extends StatelessWidget {
           backgroundColor: Colors.amber,
           foregroundColor: Colors.black,
         ),
+        scaffoldBackgroundColor: const Color(0xFF16181d),
       ),
       home: const HomeScreen(),
     );

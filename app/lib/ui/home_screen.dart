@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/tab_state.dart';
 import 'bottom_nav_bar.dart';
+import 'categories/categories_view.dart';
 import 'things/things_tab.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -17,7 +18,7 @@ class HomeScreen extends ConsumerWidget {
         tab = const ThingsTab();
         break;
       case TabState.categories:
-        tab = const Center(child: Text("Categories"));
+        tab = const CategoriesView();
         break;
     }
     return Stack(
