@@ -33,7 +33,7 @@ class SearchSystem extends ConsumerWidget {
                           child: TextField(
                             onChanged: ref
                                 .read(ThingsViewState.provider.notifier)
-                                .filterThingsFor,
+                                .filterThingsForSearchText,
                             style: const TextStyle(color: Colors.black),
                             cursorColor: Colors.black,
                             decoration: const InputDecoration(

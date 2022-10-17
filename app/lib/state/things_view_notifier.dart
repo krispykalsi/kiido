@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kiido/data/model/category.dart';
 import 'package:oxidized/oxidized.dart';
 
 import '../data/model/thing.dart';
@@ -26,7 +27,18 @@ class ThingsViewNotifier extends StateNotifier<ThingsViewState> {
 
   void exitSearch() => state = state.copyWith(isSearching: false);
 
-  void filterThingsFor(String searchText) {
+  void filterThingsForCategory(Category category) {
+    final things = state.things.maybeWhen(
+      data: (things) => things,
+      orElse: () => <Thing>[],
+    );
+    final filteredThings = things.where(
+      (thing) => thing.category == category,
+    ).toList();
+    state = state.copyWith(filteredThings: filteredThings);
+  }
+
+  void filterThingsForSearchText(String searchText) {
     final things = state.things.maybeWhen(
       data: (things) => things,
       orElse: () => <Thing>[],

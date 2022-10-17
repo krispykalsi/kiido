@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../common/slide_transition_builder.dart';
 import 'thing_detail_view.dart';
 import 'things_view.dart';
 
-class ThingsTab extends ConsumerStatefulWidget {
-  const ThingsTab({Key? key}) : super(key: key);
+class ThingsNavigator extends ConsumerStatefulWidget {
+  const ThingsNavigator({Key? key}) : super(key: key);
+
+  static const routeName = "things";
 
   @override
-  ConsumerState<ThingsTab> createState() => _ThingsTabState();
+  ConsumerState<ThingsNavigator> createState() => _ThingsTabState();
 }
 
-class _ThingsTabState extends ConsumerState<ThingsTab> {
+class _ThingsTabState extends ConsumerState<ThingsNavigator> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
@@ -33,8 +36,11 @@ class _ThingsTabState extends ConsumerState<ThingsTab> {
             default:
               throw "Invalid route in Things tab: ${settings.name}";
           }
-          return MaterialPageRoute(
-            builder: (_) => view,
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) => view,
+            transitionsBuilder: slideTransitionBuilder,
+            transitionDuration: pageTransitionDuration,
+            reverseTransitionDuration: pageTransitionDuration,
             settings: settings,
           );
         },

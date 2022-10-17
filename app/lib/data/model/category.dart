@@ -4,6 +4,14 @@ class Category {
   final int numberOfThings;
   final String imageUrl;
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Category && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
   const Category({
     required this.id,
     required this.name,

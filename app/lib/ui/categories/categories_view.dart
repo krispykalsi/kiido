@@ -10,6 +10,8 @@ import 'categories_grid_tile.dart';
 class CategoriesView extends ConsumerWidget {
   const CategoriesView({Key? key}) : super(key: key);
 
+  static const routeName = "categories";
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categories = ref.watch(
@@ -22,6 +24,11 @@ class CategoriesView extends ConsumerWidget {
           return Column(
             children: [
               SfCircularChart(
+                palette: const [
+                  Color(0xFF63E0D8),
+                  Color(0xFFec78be),
+                  Color(0xFF5991e5),
+                ],
                 legend: Legend(isVisible: true),
                 series: [
                   DoughnutSeries<Category, String>(

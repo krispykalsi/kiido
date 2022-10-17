@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/tab_state.dart';
 import 'bottom_nav_bar.dart';
-import 'categories/categories_view.dart';
-import 'things/things_tab.dart';
+import 'categories/category_navigator.dart';
+import 'things/things_navigator.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,10 +15,10 @@ class HomeScreen extends ConsumerWidget {
     late Widget tab;
     switch (tabState) {
       case TabState.things:
-        tab = const ThingsTab();
+        tab = const ThingsNavigator();
         break;
       case TabState.categories:
-        tab = const CategoriesView();
+        tab = const CategoriesNavigator();
         break;
     }
     return Stack(

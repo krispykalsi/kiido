@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../state/categories_view_state.dart';
+import '../../state/tab_state.dart';
 import 'search_system.dart';
 import 'things_list_tile.dart';
 import '../../state/things_view_state.dart';
@@ -16,20 +18,35 @@ class ThingsView extends ConsumerWidget {
     final things = ref.watch(
       ThingsViewState.provider.select((state) => state.things),
     );
-    final searchResults = ref.watch(
-      ThingsViewState.provider.select((state) => state.searchResults),
-    );
     final isSearching = ref.watch(
       ThingsViewState.provider.select((state) => state.isSearching),
     );
+    final isCategoryTab = ref.watch(TabState.provider) == TabState.categories;
+    var appBarTitle = "Things";
+    if (isCategoryTab) {
+      appBarTitle = ref.watch(
+        CategoriesViewState.provider.select(
+          (state) =>
+              state.selectedCategory.mapOr((category) => category.name, ""),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Things"),
-        actions: const [SearchSystem()],
+        title: Text(appBarTitle),
+        actions: [if (!isCategoryTab) const SearchSystem()],
       ),
       body: things.when(
         data: (things) {
-          if (isSearching) things = searchResults;
+          if (isSearching) {
+            things = ref.watch(
+              ThingsViewState.provider.select((state) => state.searchResults),
+            );
+          } else if (isCategoryTab) {
+            things = ref.watch(
+              ThingsViewState.provider.select((state) => state.filteredThings),
+            );
+          }
           return ListView.separated(
             clipBehavior: Clip.none,
             physics: const BouncingScrollPhysics(),
