@@ -23,19 +23,19 @@ class Thing {
       'name': name,
       'category': category,
       'quantity': quantity,
-      'iconUrl': iconUrl,
-      'imageUrl': imageUrl,
+      'icon_url': iconUrl,
+      'image_url': imageUrl,
     };
   }
 
   factory Thing.fromMap(Map<String, dynamic> map) {
     return Thing(
-      id: map['id'] as BigInt,
+      id: BigInt.from(map['id']),
       name: map['name'] as String,
       category: Category.fromMap(Map.from(map['category'])),
       quantity: map['quantity'] as int,
-      iconUrl: map['iconUrl'] as String,
-      imageUrl: map['imageUrl'] as String,
+      iconUrl: map['icon_url'] as String,
+      imageUrl: map['image_url'] as String,
     );
   }
 }

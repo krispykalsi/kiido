@@ -30,7 +30,7 @@ class CategoriesGridTile extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: CachedNetworkImageProvider(category.imageUrl),
+                      image: CachedNetworkImageProvider(category.iconUrl),
                     ),
                   ),
                 ),

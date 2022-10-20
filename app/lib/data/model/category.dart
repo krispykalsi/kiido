@@ -2,7 +2,7 @@ class Category {
   final BigInt id;
   final String name;
   final int numberOfThings;
-  final String imageUrl;
+  final String iconUrl;
 
   @override
   bool operator ==(Object other) =>
@@ -16,24 +16,24 @@ class Category {
     required this.id,
     required this.name,
     required this.numberOfThings,
-    required this.imageUrl,
+    required this.iconUrl,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
-      'numberOfThings': numberOfThings,
-      'imageUrl': imageUrl,
+      'number_of_things': numberOfThings,
+      'icon_url': iconUrl,
     };
   }
 
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
-      id: map['id'] as BigInt,
+      id: BigInt.from(map['id']),
       name: map['name'] as String,
-      numberOfThings: map['numberOfThings'] as int,
-      imageUrl: map['imageUrl'] as String,
+      numberOfThings: map['number_of_things'] as int,
+      iconUrl: map['icon_url'] as String,
     );
   }
 }
