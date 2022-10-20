@@ -23,8 +23,10 @@ func New() Repository {
 	connectionString := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=require", host, user, password, database)
 	db, err := sql.Open("postgres", connectionString)
 	checkError(err)
+	fmt.Println("Waiting for connection...")
 	err = db.Ping()
 	checkError(err)
+	fmt.Println("Connected ✅")
 	return &DBRepository{db}
 }
 
