@@ -1,0 +1,1 @@
+docker push krispykalsi/kiido-api:1.0
