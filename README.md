@@ -1,5 +1,5 @@
-# Kiido
-![Go version](https://img.shields.io/github/go-mod/go-version/krispykalsi/kiido?filename=server%2Fgo.mod)  ![Flutter version](https://img.shields.io/badge/Flutter-v3.3.4-lightblue) ![Dart version](https://img.shields.io/badge/Dart-v2.18.2-blue)
+# Kiido   ![Go version](https://img.shields.io/github/go-mod/go-version/krispykalsi/kiido?filename=server%2Fgo.mod)  ![Flutter version](https://img.shields.io/badge/Flutter-v3.3.4-lightblue) ![Dart version](https://img.shields.io/badge/Dart-v2.18.2-blue)
+
 *A simple full-stack app with "things" and "categories"*
 > Reference: https://simpleapp-ptms.glideapp.io/
 
