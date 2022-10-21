@@ -51,7 +51,6 @@ class _ThingDetailViewState extends ConsumerState<ThingDetailView> {
                 children: [
                   SizedBox(height: 252, child: ThingImageBanner(thing)),
                   itemSpacing,
-                  itemSpacing,
                   const Text(
                     "Specifications",
                     textAlign: TextAlign.left,

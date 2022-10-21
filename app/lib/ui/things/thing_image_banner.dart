@@ -25,13 +25,14 @@ class ThingImageBanner extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Positioned.fill(
+          const Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.center,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
+                  stops: [0.3, 1],
+                  colors: [Colors.transparent, Color(0xFF16181d)],
                 ),
               ),
             ),
