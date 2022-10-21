@@ -11,7 +11,9 @@ class AzureRepository implements Repository {
 
   final http.Client _client;
 
-  static final _baseUrl = Uri.parse("https://oshi.at");
+  static final _baseUrl = Uri.parse(
+    "http://calcul-kiido-api.hgcuazfneghjeyev.centralindia.azurecontainer.io:5858",
+  );
 
   _decodeResponse(http.Response res) {
     if (!res.statusCode.toString().startsWith("2")) {
@@ -22,7 +24,7 @@ class AzureRepository implements Repository {
 
   @override
   Future<List<Category>> fetchCategories() async {
-    final uri = _baseUrl.resolve("/cQNq");
+    final uri = _baseUrl.resolve("/categories");
     final res = await _client.get(uri);
     var decodedResponse = _decodeResponse(res) as Iterable;
     return decodedResponse
@@ -32,7 +34,7 @@ class AzureRepository implements Repository {
 
   @override
   Future<List<Thing>> fetchThings() async {
-    final uri = _baseUrl.resolve("/mitg");
+    final uri = _baseUrl.resolve("/things");
     final res = await _client.get(uri);
     var decodedResponse = _decodeResponse(res) as Iterable;
     return decodedResponse
@@ -42,7 +44,7 @@ class AzureRepository implements Repository {
 
   @override
   Future<List<Thing>> fetchThingsOfCategory(BigInt categoryId) async {
-    final uri = _baseUrl.resolve("/HZVg");
+    final uri = _baseUrl.resolve("/things?category=$categoryId");
     final res = await _client.get(uri);
     final decodedResponse = _decodeResponse(res) as Iterable;
     return decodedResponse
