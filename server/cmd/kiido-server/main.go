@@ -21,5 +21,5 @@ func main() {
 	if port == "" {
 		port = "8000"
 	}
-	r.Run("localhost:" + port)
+	r.Run(":" + port)
 }
