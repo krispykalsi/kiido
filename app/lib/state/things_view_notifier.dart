@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kiido/data/model/category.dart';
 import 'package:oxidized/oxidized.dart';
@@ -20,7 +22,20 @@ class ThingsViewNotifier extends StateNotifier<ThingsViewState> {
   }
 
   void bringThingInFocus(Thing thing) {
-    state = state.copyWith(thingInFocus: Option.some(thing));
+    final thingsOfSameCategory =
+        state.things.value?.where((t) => t.category == thing.category) ?? [];
+    final randomSameCategoryThings = <Thing>[];
+    final random = Random();
+    for (var i = 0; i < 3 && i < thingsOfSameCategory.length; i++) {
+      final randomIdx = random.nextInt(thingsOfSameCategory.length);
+      final randomThing = thingsOfSameCategory.elementAt(randomIdx);
+      if (randomThing.id == thing.id) continue;
+      randomSameCategoryThings.add(randomThing);
+    }
+    state = state.copyWith(
+      thingInFocus: Option.some(thing),
+      relatedThings: randomSameCategoryThings,
+    );
   }
 
   void enterSearch() => state = state.copyWith(isSearching: true);
@@ -32,9 +47,8 @@ class ThingsViewNotifier extends StateNotifier<ThingsViewState> {
       data: (things) => things,
       orElse: () => <Thing>[],
     );
-    final filteredThings = things.where(
-      (thing) => thing.category == category,
-    ).toList();
+    final filteredThings =
+        things.where((thing) => thing.category == category).toList();
     state = state.copyWith(filteredThings: filteredThings);
   }
 

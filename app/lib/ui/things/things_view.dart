@@ -50,7 +50,8 @@ class ThingsView extends ConsumerWidget {
           return ListView.separated(
             clipBehavior: Clip.none,
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 70),
             itemBuilder: (context, index) => ThingsListTile(things[index]),
             separatorBuilder: (context, index) => const SizedBox(height: 0),
             itemCount: things.length,

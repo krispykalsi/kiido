@@ -8,6 +8,7 @@ import 'things_view_notifier.dart';
 
 class ThingsViewState {
   final AsyncValue<List<Thing>> things;
+  final List<Thing> relatedThings;
   final List<Thing> searchResults;
   final List<Thing> filteredThings;
   final bool isSearching;
@@ -15,6 +16,7 @@ class ThingsViewState {
 
   static const initial = ThingsViewState(
     things: AsyncValue.loading(),
+    relatedThings: [],
     thingInFocus: None(),
     searchResults: [],
     filteredThings: [],
@@ -43,6 +45,7 @@ class ThingsViewState {
 
   const ThingsViewState({
     required this.things,
+    required this.relatedThings,
     required this.searchResults,
     required this.filteredThings,
     required this.isSearching,
@@ -51,6 +54,7 @@ class ThingsViewState {
 
   ThingsViewState copyWith({
     AsyncValue<List<Thing>>? things,
+    List<Thing>? relatedThings,
     List<Thing>? searchResults,
     List<Thing>? filteredThings,
     bool? isSearching,
@@ -58,6 +62,7 @@ class ThingsViewState {
   }) {
     return ThingsViewState(
       things: things ?? this.things,
+      relatedThings: relatedThings ?? this.relatedThings,
       searchResults: searchResults ?? this.searchResults,
       filteredThings: filteredThings ?? this.filteredThings,
       isSearching: isSearching ?? this.isSearching,

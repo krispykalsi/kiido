@@ -29,6 +29,7 @@ class ThingsListTile extends ConsumerWidget {
         ref.read(ThingsViewState.provider.notifier).bringThingInFocus(thing);
         Navigator.of(context).pushNamed(ThingDetailView.routeName);
       },
+      contentPadding: EdgeInsets.zero,
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       title: Text(
         thing.name,

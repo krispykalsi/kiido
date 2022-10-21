@@ -3,36 +3,54 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kiido/state/things_view_state.dart';
 import 'package:kiido/ui/things/thing_image_banner.dart';
 import 'package:kiido/ui/things/thing_specification_item.dart';
+import 'package:kiido/ui/things/things_list_tile.dart';
+import 'package:oxidized/oxidized.dart';
 
-class ThingDetailView extends ConsumerWidget {
+import '../../data/model/thing.dart';
+
+class ThingDetailView extends ConsumerStatefulWidget {
   const ThingDetailView({Key? key}) : super(key: key);
 
   static const routeName = "detail";
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final thing = ref.watch(
-      ThingsViewState.provider.select((state) => state.thingInFocus),
-    );
+  ConsumerState<ThingDetailView> createState() => _ThingDetailViewState();
+}
+
+class _ThingDetailViewState extends ConsumerState<ThingDetailView> {
+  late Option<Thing> _thing;
+  late List<Thing> _relatedThings;
+
+  @override
+  void initState() {
+    super.initState();
+    final thingsViewState = ref.read(ThingsViewState.provider);
+    _thing = thingsViewState.thingInFocus;
+    _relatedThings = thingsViewState.relatedThings;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: thing.when(
+      appBar: _thing.when(
         some: (thing) => AppBar(title: Text(thing.name)),
         none: () => null,
       ),
-      body: thing.when(
+      body: _thing.when(
+        none: () => const Center(child: Text("Please select an item...")),
         some: (thing) {
-          const itemSpacing = SizedBox(height: 8);
+          const itemSpacing = SizedBox(height: 12);
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
+            physics: const BouncingScrollPhysics(),
+            padding:
+                const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 70),
             child: DefaultTextStyle(
               style: const TextStyle(fontSize: 18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(
-                    height: 252,
-                    child: ThingImageBanner(thing),
-                  ),
+                  SizedBox(height: 252, child: ThingImageBanner(thing)),
+                  itemSpacing,
                   itemSpacing,
                   const Text(
                     "Specifications",
@@ -52,12 +70,22 @@ class ThingDetailView extends ConsumerWidget {
                     heading: "Quantity",
                     detail: "${thing.quantity}",
                   ),
+                  itemSpacing,
+                  itemSpacing,
+                  const Text(
+                    "You may also like",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  itemSpacing,
+                  ..._relatedThings
+                      .map((relatedThing) => ThingsListTile(relatedThing))
+                      .toList(),
                 ],
               ),
             ),
           );
         },
-        none: () => const Center(child: Text("Please select an item...")),
       ),
     );
   }
